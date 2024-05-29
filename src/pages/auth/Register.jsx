@@ -3,11 +3,13 @@ import { CssBaseline, TextField, Link, Grid, Box, Typography, Container, Button 
 import { Copyright } from '../../components/Copyright';
 import { authService } from '../../services/authServices';
 import { Toast } from '../../components/Toast';
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
 
 
     const handleSubmit = (event) => {
+        const navigate = useNavigate()
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         let email = data.get('email');
@@ -27,6 +29,7 @@ export const Register = () => {
                     console.log(response.message + " : " + response.data.email);
                     // return <Toast message={response.message + " : " + response.data.email} severity={1}/>
                     // setMessage(response.message + " : " + response.data.email);
+                    navigate("/login");
                 }
             })
             .catch(error => {

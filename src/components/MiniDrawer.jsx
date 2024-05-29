@@ -12,11 +12,14 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DynamicBreadcrumbs from './DynamicBreadcrumbs';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { navItems } from '../constants/NaveItems';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { authService } from '../services/authServices';
+import { useAuth } from '../contexts/authContext';
 
 const drawerWidth = 240;
 
@@ -86,9 +89,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({ children }) {
+    const navigate = useNavigate()
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-
+    const { logout } = useAuth();
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -133,6 +137,13 @@ export default function MiniDrawer({ children }) {
                     {/* <IconButton sx={{ ml: 1 }} onClick={toggleThemeMode} color="inherit">
                         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton> */}
+                    <IconButton sx={{ ml: 1 }} onClick={()=>{
+                        authService.logout();
+                        logout();
+                        navigate("/login");
+                    }} color="inherit">
+                        <LogoutIcon />
+                    </IconButton>
                     {/* </Box> */}
                 </Toolbar>
             </AppBar>
@@ -171,7 +182,7 @@ export default function MiniDrawer({ children }) {
                         </Link>
                     ))}
                 </List>
-                <Divider />
+                {/* <Divider />
                 <List>
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -195,7 +206,7 @@ export default function MiniDrawer({ children }) {
                             </ListItemButton>
                         </ListItem>
                     ))}
-                </List>
+                </List> */}
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />

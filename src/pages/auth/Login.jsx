@@ -4,11 +4,12 @@ import { Button, CssBaseline, TextField, Link, Box, Grid, Typography } from '@mu
 import { authService } from '../../services/authServices';
 import { Copyright } from '../../components/Copyright';
 import { useAuth } from '../../contexts/authContext';
+import { useDispatch } from 'react-redux';
 
 export const Login = () => {
 
     const { login } = useAuth();
-
+    const dispatch = useDispatch();
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
