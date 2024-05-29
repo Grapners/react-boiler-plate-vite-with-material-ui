@@ -4,7 +4,7 @@ import { Box, Toolbar, List, CssBaseline, Typography, Divider, IconButton, ListI
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import { Avatar } from '@mui/material';
-import { deepOrange } from '@mui/material/colors';
+import { deepOrange, lightBlue } from '@mui/material/colors';
 import MenuIcon from '@mui/icons-material/Menu';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -20,6 +20,7 @@ import { navItems } from '../constants/NaveItems';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../services/authServices';
 import { useAuth } from '../contexts/authContext';
+import { ModeToggle } from './ModeToggle';
 
 const drawerWidth = 240;
 
@@ -121,22 +122,15 @@ export default function MiniDrawer({ children }) {
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                         Dashboard
                     </Typography>
-                    {/* <Box sx={{display:"flex"}}>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton> */}
+                        
                     <Avatar
-                        sx={{ bgcolor: deepOrange[500] }}
+                        sx={{ bgcolor: lightBlue[500] }}
                         alt="Remy Sharp"
                         src="/broken-image.jpg"
                     >
                         B
                     </Avatar>
-                    {/* <IconButton sx={{ ml: 1 }} onClick={toggleThemeMode} color="inherit">
-                        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-                    </IconButton> */}
+                    <ModeToggle />
                     <IconButton sx={{ ml: 1 }} onClick={()=>{
                         authService.logout();
                         logout();

@@ -6,7 +6,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 const DynamicBreadcrumbs = () => {
     const location = useLocation();
     const pathnames = location.pathname.split('/').filter(x => x);
-    console.log("pathnames", location.pathname);
+    // console.log("pathnames", location.pathname);
 
     return (
         <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
